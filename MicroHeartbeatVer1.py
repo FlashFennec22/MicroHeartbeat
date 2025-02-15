@@ -20,7 +20,7 @@ def ping_host():
     
     current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     
-    # Append the output to a log file in /home/user/Documents
+    # Append the output to a log file in /home/user/
     with open(home / "MicroHeartbeat.log", 'a', encoding='utf-8') as log_file:
         log_file.write(output)
         log_file.write(f"{current_time}\n")
