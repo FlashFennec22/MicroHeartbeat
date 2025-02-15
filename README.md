@@ -8,4 +8,5 @@ Note for Windows users: The executable is currently only working under Linux. I 
 Looking for the log file?
 
 Linux Users: /home/YourUserHere/
+
 Windows Users: C:/Users/YourUserHere/
