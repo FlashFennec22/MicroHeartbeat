@@ -1,5 +1,6 @@
 import subprocess
 import sys
+import re
 import datetime
 import tkinter as tk
 
@@ -25,11 +26,6 @@ def ping_host():
         log_file.write(output)
         log_file.write(f"{current_time}\n")
         log_file.write('\n')
-
-
-
-
-
     
 
 def toggle_run_stop():
@@ -43,6 +39,9 @@ def toggle_run_stop():
         # Stop running
         button.config(text="Run")
         is_running = False
+                    
+
+
 
 def execute_script():
     global is_running
@@ -59,7 +58,24 @@ button.pack()
 
 is_running = False
 
+
 root.mainloop()
+
+#Parses the log file for strings where Lost is not equal to 0, printing the findings into a secondary log file. Each time packet loss is detected, count goes up by one.
+def count_non_zero_lost(log_file_path):
+    pattern = r'Lost = (-?\d+)'
+    count = 0
+    
+    with open(log_file_path, 'r') as file:
+        for line in file:
+            match = re.search(pattern, line)
+            if match:
+                value = int(match.group(1))
+                if value != 0:
+                    count += 1
+                with open(home / "Packetloss.log", 'a', encoding='utf-8') as log_file:
+                    log_file.write(f"Parsing line by line. Packet loss incidents detected: {count}")
+                    log_file.write('\n')
 
     
     
